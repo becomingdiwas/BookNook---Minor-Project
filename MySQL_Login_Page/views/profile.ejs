@@ -2,215 +2,199 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style.css">
-    <style>
-        body {
-            background-color: #f5f7fa;
-        }
-
-        .navbar-brand {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .avatar-ctn {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-        }
-
-        .card {
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-header {
-            background-color: #ffffff;
-            border-bottom: none;
-            font-weight: bold;
-        }
-
-        .card-body {
-            background-color: #ffffff;
-        }
-
-        .card-title {
-            margin-bottom: 10px;
-        }
-
-        .card-text {
-            color: #606984;
-        }
-
-        .btn-primary {
-            background-color: #3b5998;
-            border-color: #3b5998;
-        }
-
-        .btn-primary:hover {
-            background-color: #2d4373;
-            border-color: #2d4373;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    /* ... (your existing CSS styles) ... */
+  </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">BookNook</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/profile">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/auth/logout">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container my-5">
-        <div class="row">
-            <div class="col-4">
-                <div class="card">
-                    <div class="avatar-ctn">
-                        <img src="./avatar.png" class="avatar" alt="user profile picture">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="username"><%= user.name %></h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quasi
-                            natus ullam explicabo vitae consectetur molestias aut esse, officiis labore sapiente
-                            architecto numquam iste minus similique quos mollitia reprehenderit delectus?</p>
-                        <a href="#" class="btn btn-primary" id="useremail"><%= user.email %></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-8">
-                <div class="card text-center">
-                    <div class="card-header">
-                        Profile Page
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="welcome">Hey <%= user.name %>, welcome back!</h5>
-                        <p class="card-text">
-                            This is your profile where you can add all information about yourself
-                        </p>
-                        <a href="#" class="btn btn-primary" onclick="showUploadForm()">Upload Post</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        Node MySQL project
-                    </div>
-                </div>
-                <div id="uploadFormContainer" style="display: none;"></div>
-            </div>
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">BookNook</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <!-- Replace '/my-book-list' with the actual link to the Book List page -->
+            <a class="nav-link" aria-current="page" href="/my-book-list" style="color: #fff;">Book List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/auth/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/babel-standalone/babel.min.js" crossorigin></script>
-    <script type="text/babel">
-        function UploadBookForm() {
-            const handleSaleExchangeChange = (event) => {
-                const priceInput = document.getElementById('price');
-                priceInput.disabled = event.target.value === 'exchange';
-            };
+  </nav>
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-4">
+        <div class="card">
+          <div class="avatar-ctn">
+            <img src="./avatar.png" class="avatar" alt="user profile picture">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title" id="username"><%= user.name %></h5>
+            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quasi
+              natus ullam explicabo vitae consectetur molestias aut esse, officiis labore sapiente
+              architecto numquam iste minus similique quos mollitia reprehenderit delectus?</p>
+            <a href="#" class="btn btn-primary" id="useremail"><%= user.email %></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="card text-center">
+          <div class="card-header">
+            Profile Page
+          </div>
+          <div class="card-body">
+            <h5 class="card-title" id="welcome">Hey <%= user.name %>, welcome back!</h5>
+            <p class="card-text">
+              This is your profile where you can add all information about yourself
+            </p>
+            <a href="#" class="btn btn-primary" onclick="showUploadForm()">Upload Book</a>
+          </div>
+          <div class="card-footer text-muted">
+            Node MySQL project
+          </div>
+        </div>
+        <div id="uploadFormContainer" style="display: none;"></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone/babel.min.js" crossorigin></script>
+  <script type="text/babel">
+    function UploadBookForm() {
+      const handleSaleExchangeChange = (event) => {
+      const priceInput = document.getElementById('price');
+      const exchangeWithInput = document.getElementById('exchangeWith');
+      
+      priceInput.disabled = event.target.value === 'exchange';
+      exchangeWithInput.required = event.target.value === 'exchange';
+      exchangeWithInput.disabled = event.target.value === 'sale';
+      exchangeWithInput.value = ''; // Reset the value when switching trade condition
+    };
 
-            return (
-                <div>
-                    <form id="uploadForm" onSubmit={submitForm}>
-                        <div class="mb-3">
-                            <label for="bookTitle" class="form-label">Book Title</label>
-                            <input type="text" class="form-control" id="bookTitle" placeholder="Enter book title" required />
-                        </div>
-                        <div class="mb-3">
-                            <label for="bookImage" class="form-label">Book Image</label>
-                            <input type="file" class="form-control" id="bookImage" required />
-                        </div>
-                        <div class="mb-3">
-                            <label for="author" class="form-label">Author</label>
-                            <input type="text" class="form-control" id="author" placeholder="Enter author name" required />
-                        </div>
-                        <div class="mb-3">
-                            <label for="bookCondition" class="form-label">Book Condition</label>
-                            <select class="form-control" id="bookCondition" required>
-                                <option value="Good">Good</option>
-                                <option value="Fair">Fair</option>
-                                <option value="Poor">Poor</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="tradeCondition" class="form-label">Trade Condition</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="tradeCondition" id="sale" value="sale" required onChange={handleSaleExchangeChange} />
-                                <label class="form-check-label" for="sale">
-                                    Sale
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="tradeCondition" id="exchange" value="exchange" required onChange={handleSaleExchangeChange} />
-                                <label class="form-check-label" for="exchange">
-                                    Exchange
-                                </label>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="price" class="form-label">Price</label>
-                            <input type="number" class="form-control" id="price" placeholder="Enter book price" required />
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            );
-        }
+      function submitForm(event) {
+  event.preventDefault();
 
-        function showUploadForm() {
-            const uploadFormContainer = document.getElementById('uploadFormContainer');
-            ReactDOM.render(<UploadBookForm />, uploadFormContainer);
-            uploadFormContainer.style.display = 'block';
-        }
+  // Get form values
+  const bookTitle = document.getElementById('bookTitle').value;
+  const bookImage = document.getElementById('bookImage').files[0];
+  const author = document.getElementById('author').value;
+  const bookCondition = document.getElementById('bookCondition').value;
+  const tradeCondition = document.querySelector('input[name="tradeCondition"]:checked').value;
+  const price = document.getElementById('price').value;
+  const exchangeWith = document.getElementById('exchangeWith').value; // Get the "Exchange With" value
 
-        function submitForm(event) {
-            event.preventDefault();
+  // Create a FormData object to send the form data including the file
+  const formData = new FormData();
+  formData.append('title', bookTitle);
+  formData.append('author', author);
+  formData.append('book_condition', bookCondition);
+  formData.append('trade_condition', tradeCondition);
+  formData.append('price', price);
+  formData.append('exchangewith', exchangeWith); // Append the "Exchange With" value using the correct column name
+  formData.append('image', bookImage);
 
-            // Get form values
-            const bookTitle = document.getElementById('bookTitle').value;
-            const bookImage = document.getElementById('bookImage').files[0];
-            const author = document.getElementById('author').value;
-            const bookCondition = document.getElementById('bookCondition').value;
-            const price = document.getElementById('price').value;
+  // Send the form data to the backend using fetch or axios
+  fetch('/books/add-book', {
+    method: 'POST',
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Handle the response from the backend, e.g., show a success message or handle errors
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      // Handle the error, e.g., show an error message to the user
+    });
 
-            // Perform your logic with the form values here
-            console.log('Book Title:', bookTitle);
-            console.log('Book Image:', bookImage);
-            console.log('Author:', author);
-            console.log('Book Condition:', bookCondition);
-            console.log('Price:', price);
+  // Reset the form
+  document.getElementById('uploadForm').reset();
+}
 
-            // Reset the form
-            document.getElementById('uploadForm').reset();
-        }
-    </script>
+
+      return (
+        <div>
+          <form id="uploadForm" onSubmit={submitForm} method="post" action="/books/add-book" enctype="multipart/form-data">
+
+            <div class="mb-3">
+              <label for="bookTitle" class="form-label">Book Title</label>
+              <input type="text" class="form-control" id="bookTitle" name="title" placeholder="Enter book title"
+                required />
+            </div>
+            <div class="mb-3">
+              <label for="author" class="form-label">Author</label>
+              <input type="text" class="form-control" id="author" name="author" placeholder="Enter author name"
+                required />
+            </div>
+            <div class="mb-3">
+              <label for="bookCondition" class="form-label">Book Condition</label>
+              <select class="form-control" id="bookCondition" name="book_condition" required>
+                <option value="Good">Good</option>
+                <option value="Fair">Fair</option>
+                <option value="Poor">Poor</option>
+              </select>
+            </div>
+            <div class="mb-3">
+            <label for="tradeCondition" class="form-label">Trade Condition</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="tradeCondition" id="sale" value="sale" required onChange={handleSaleExchangeChange} />
+              <label class="form-check-label" for="sale">
+                Sale
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="tradeCondition" id="exchange" value="exchange" required onChange={handleSaleExchangeChange} />
+              <label class="form-check-label" for="exchange">
+                Exchange
+              </label>
+            </div>
+          </div>
+            <div class="mb-3">
+              <label for="price" class="form-label">Price</label>
+              <input type="number" class="form-control" id="price" name="price" placeholder="Enter book price"
+                required />
+            </div>
+            <div class="mb-3">
+  <label for="bookImage" class="form-label">Book Image</label>
+  <input type="file" class="form-control" id="bookImage" name="image" required />
+</div>
+<div class="mb-3">
+  <label for="exchangeWith" class="form-label">Exchange With</label>
+  <input type="text" class="form-control" id="exchangeWith" name="exchangeWith" placeholder="Enter book details for exchange" required />
+</div>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+);
+}
+
+function showUploadForm() {
+const uploadFormContainer = document.getElementById('uploadFormContainer');
+ReactDOM.render(<UploadBookForm />, uploadFormContainer);
+uploadFormContainer.style.display = 'block';
+}
+</script>
 </body>
-
 </html>
