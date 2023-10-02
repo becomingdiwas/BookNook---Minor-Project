@@ -45,7 +45,17 @@ const upload = multer({ storage: storage });
 exports.addBook = [
   upload.single('image'),
   (req, res) => {
-    const { title, author, book_condition, trade_condition, price, exchangewith } = req.body; // Change 'exchangeWith' to 'exchangewith'
+    const {
+      title,
+      author,
+      book_condition,
+      trade_condition,
+      price,
+      exchangewith,
+      provider_name, // Add these lines to retrieve provider information
+      provider_number,
+      provider_location,
+    } = req.body;
     const image = req.file ? req.file.filename : null;
 
     if (!title) {
@@ -53,27 +63,31 @@ exports.addBook = [
     }
 
     const sql =
-      'INSERT INTO books (title, author, book_condition, trade_condition, price, image, exchangewith) VALUES (?, ?, ?, ?, ?, ?, ?)';
-    db.query(sql, [title, author, book_condition, trade_condition, price, image, exchangewith], (err, result) => {
-      if (err) {
-        console.error('Error saving book data to the database:', err);
-        return res.status(500).json({ error: 'Error saving book data to the database' });
-      } else {
-        console.log('Book data saved successfully!');
-        return res.redirect('/profile');
+      'INSERT INTO books (title, author, book_condition, trade_condition, price, image, exchangewith, provider_name, provider_number, provider_location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    db.query(
+      sql,
+      [title, author, book_condition, trade_condition, price, image, exchangewith, provider_name, provider_number, provider_location],
+      (err, result) => {
+        if (err) {
+          console.error('Error saving book data to the database:', err);
+          return res.status(500).json({ error: 'Error saving book data to the database' });
+        } else {
+          console.log('Book data saved successfully!');
+          return res.redirect('/profile');
+        }
       }
-    });
+    );
   },
 ];
 
 
-  exports.getAllBooks = (req, res) => {
-    const query = 'SELECT * FROM books';
-    db.query(query, (err, results) => {
-      if (err) {
-        console.error('Error fetching books:', err);
-        return res.status(500).send('An error occurred while fetching books.');
-      }
-      res.render('all_books', { books: results });
-    });
-  };
+exports.getAllBooks = (req, res) => {
+  const query = 'SELECT * FROM books';
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching books:', err);
+      return res.status(500).send('An error occurred while fetching books.');
+    }
+    res.render('all_books', { books: results });
+  });
+};

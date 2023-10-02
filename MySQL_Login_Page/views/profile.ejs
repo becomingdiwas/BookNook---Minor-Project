@@ -10,23 +10,149 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="./style.css">
   <style>
-    /* ... (your existing CSS styles) ... */
+    /* Custom styles for the enhanced aesthetic theme */
+    body {
+      background-image: url('https://images2.alphacoders.com/261/26102.jpg'); /* Background image URL */
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+            background-color: #343a40; /* Navbar background color */
+        }
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff; /* Navbar brand text color */
+        }
+        .navbar-toggler-icon {
+            background-color: #fff; /* Navbar toggler color */
+        }
+        .navbar-nav .nav-item {
+            margin-right: 15px;
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffc107 !important; /* Navbar link color on hover */
+        }
+
+    .navbar {
+      background-color: #333; /* Dark gray navbar background color */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Navbar box shadow */
+    }
+  
+    .navbar-brand, .nav-link {
+      color: #fff !important; /* Navbar text color */
+    }
+  
+    .navbar-toggler-icon {
+      background-color: #fff; /* Navbar toggler color */
+    }
+  
+    .form-select, .form-control, .btn {
+      background-color: #fff; /* Form elements background color */
+      color: #333 !important; /* Form elements text color */
+      border: 1px solid #ccc; /* Form elements border color */
+      border-radius: 4px; /* Rounded corners for form elements */
+      transition: all 0.3s ease; /* Smooth transition for all form elements */
+    }
+  
+    .form-select:focus, .form-control:focus {
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.2); /* Focus box shadow for form elements */
+      border-color: #555; /* Border color on focus */
+    }
+  
+    .card {
+      background-color: rgba(255, 255, 255, 0.7); /* Transparent white background color */
+      border: 1px solid #e0e0e0; /* Card border color */
+      border-radius: 6px; /* Rounded corners for the card */
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Card box shadow */
+      transition: transform 0.2s ease; /* Smooth transition for card hover effect */
+    }
+  
+    .card:hover {
+      transform: translateY(-5px); /* Card lift on hover */
+    }
+  
+    .card-title {
+      color: #333; /* Card title color */
+      font-size: 1.5rem; /* Larger font size for card title */
+      margin-bottom: 10px;
+    }
+  
+    .card-text {
+      color: #666; /* Card text color */
+      margin-bottom: 15px;
+    }
+  
+    .btn-primary {
+      background-color: #333 !important; /* Primary button background color */
+      border: 1px solid #333 !important; /* Primary button border color */
+      color: #fff !important; /* Primary button text color */
+      transition: background-color 0.3s ease; /* Smooth transition for button color */
+    }
+  
+    .btn-primary:hover {
+      background-color: #555 !important; /* Darker color on hover */
+    }
+  
+    /* Additional styling can be added as needed */
+  
+    .container {
+      background-color: rgba(255, 255, 255, 0.7); /* Transparent white background color */
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin-top: 20px;
+    }
+  
+    h1 {
+      color: #333; /* Heading color */
+      margin-bottom: 20px;
+    }
+  
+    /* Avatar styles */
+    .avatar-ctn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+    }
+  
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+  
+    /* Custom styles for the enhanced aesthetic theme end here */
   </style>
+
+  
+  
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">BookNook</a>
+      <a class="navbar-brand" href="/home.html">BookNook</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/home.html">Home</a>
-          </li>
           <li class="nav-item">
             <!-- Replace '/my-book-list' with the actual link to the Book List page -->
             <a class="nav-link" aria-current="page" href="/my-book-list" style="color: #fff;">Book List</a>
@@ -59,19 +185,16 @@
       </div>
       <div class="col-8">
         <div class="card text-center">
-          <div class="card-header">
-            Profile Page
-          </div>
+          
           <div class="card-body">
-            <h5 class="card-title" id="welcome">Hey <%= user.name %>, welcome back!</h5>
+            <h5 class="card-title" id="welcome">Hey, <%= user.name %>, welcome !</h5>
             <p class="card-text">
-              This is your profile where you can add all information about yourself
+              Fill Form To Upload Your Book For Sale/Exchange. Enjoy!  
             </p>
             <a href="#" class="btn btn-primary" onclick="showUploadForm()">Upload Book</a>
           </div>
-          <div class="card-footer text-muted">
-            Node MySQL project
-          </div>
+          
+          
         </div>
         <div id="uploadFormContainer" style="display: none;"></div>
       </div>
@@ -102,7 +225,10 @@
   const bookCondition = document.getElementById('bookCondition').value;
   const tradeCondition = document.querySelector('input[name="tradeCondition"]:checked').value;
   const price = document.getElementById('price').value;
-  const exchangeWith = document.getElementById('exchangeWith').value; // Get the "Exchange With" value
+  const exchangeWith = document.getElementById('exchangeWith').value;
+  const providerName = document.getElementById('providerName').value;
+const providerNumber = document.getElementById('providerNumber').value;
+const providerLocation = document.getElementById('providerLocation').value; // Get the "Exchange With" value
 
   // Create a FormData object to send the form data including the file
   const formData = new FormData();
@@ -113,6 +239,9 @@
   formData.append('price', price);
   formData.append('exchangewith', exchangeWith); // Append the "Exchange With" value using the correct column name
   formData.append('image', bookImage);
+  formData.append('provider_name', providerName);
+  formData.append('provider_number', providerNumber); // Append the "Exchange With" value using the correct column name
+  formData.append('provider_location', providerLocation);
 
   // Send the form data to the backend using fetch or axios
   fetch('/books/add-book', {
@@ -184,6 +313,16 @@
   <label for="exchangeWith" class="form-label">Exchange With</label>
   <input type="text" class="form-control" id="exchangeWith" name="exchangeWith" placeholder="Enter book details for exchange" required />
 </div>
+<label for="providerName" class="form-label">Provider Name</label>
+<input type="text" class="form-control" id="providerName" name="provider_name" placeholder="Enter provider name" required />
+
+<label for="providerNumber" class="form-label">Provider Number</label>
+<input type="text" class="form-control" id="providerNumber" name="provider_number" placeholder="Enter provider number" required />
+
+<label for="providerLocation" class="form-label">Provider Location</label>
+<input type="text" class="form-control" id="providerLocation" name="provider_location" placeholder="Enter provider location" required />
+
+
 <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>
@@ -195,6 +334,7 @@ const uploadFormContainer = document.getElementById('uploadFormContainer');
 ReactDOM.render(<UploadBookForm />, uploadFormContainer);
 uploadFormContainer.style.display = 'block';
 }
+
 </script>
 </body>
 </html>

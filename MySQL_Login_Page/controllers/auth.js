@@ -20,10 +20,9 @@ const createSendToken = (user, statusCode, res) => {
     const token = signToken(user.id);
   
     const cookieOptions = {
-      expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
-      httpOnly: true
-    };
-  
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // Expires in 24 hours
+        httpOnly: true,
+      };
     res.cookie('userSave', token, cookieOptions);
   
     res.status(statusCode).redirect("/");
@@ -33,16 +32,14 @@ exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
-            return res.status(400).sendFile(__dirname + "/login.html", {
-                message: "Please provide an email and password"
-            });
+            // If email or password is missing, you can redirect to the login page with a query parameter
+            return res.redirect("/login?message=Please%20provide%20an%20email%20and%20password");
         }
         db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
             console.log(results);
             if (!results || !await bcrypt.compare(password, results[0].password)) {
-                res.status(401).sendFile(__dirname + '/login.html', {
-                    message: 'Email or password is incorrect'
-                });
+                // Password is incorrect, redirect to the login page with a query parameter
+                return res.redirect("/login?message=Password%20Incorrect");
             } else {
                 createSendToken(results[0], 200, res);
             }
@@ -51,6 +48,40 @@ exports.login = async (req, res) => {
         console.log(err);
     }
 };
+
+// Inside your login route or controller
+exports.adminLogin = async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      if (!email || !password) {
+        // If email or password is missing, you can redirect to the admin login page with a query parameter
+        return res.redirect('/admin-login?message=Please%20provide%20an%20email%20and%20password');
+      }
+      db.query('SELECT * FROM admins WHERE email = ?', [email], (err, results) => {
+        if (!results || results.length === 0) {
+          // Admin with the given email not found
+          return res.redirect('/admin-login?message=Email%20not%20found');
+        }
+  
+        const admin = results[0];
+  
+        if (admin.password !== password) {
+          // Password is incorrect
+          return res.redirect('/admin-login?message=Password%20Incorrect');
+        } else {
+          // Admin login successful
+          // You can store admin data in session if needed
+          req.session.admin = admin;
+          // Redirect to the admin profile page or any other admin-specific page
+          res.redirect('/admin-profile');
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+
 
 exports.register = (req, res) => {
     console.log(req.body);
@@ -139,3 +170,5 @@ exports.logout = (req, res) => {
     });
     res.status(200).redirect("/");
 };
+
+

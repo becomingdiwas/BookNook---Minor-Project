@@ -5,16 +5,78 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
+    <style>
+        /* Global Styles */
+        body {
+            background-image: url('https://th.bing.com/th/id/R.6f7cc00cf40a4f07f41954a9ecfdcc47?rik=83KbEPx8cr3rWQ&pid=ImgRaw&r=0');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #343a40; /* Navbar background color */
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff; /* Navbar brand text color */
+        }
+
+        .navbar-toggler-icon {
+            background-color: #fff; /* Navbar toggler color */
+        }
+
+        .navbar-nav .nav-item {
+            margin-right: 15px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffc107 !important; /* Navbar link color on hover */
+        }
+
+        /* Card Styles */
+        .card {
+            width: 40rem;
+            margin: 0 auto;
+            margin-top: 5rem;
+            background-color: rgba(255, 255, 255, 0.8); /* Card background color with transparency */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        /* Additional custom styling for links, buttons, and form elements can be added as needed */
+
+    </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">BookNook</a>
+            <a class="navbar-brand" href="#" id="booknook-link">BookNook</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -22,9 +84,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/register">Register</a>
                     </li>
@@ -57,20 +116,97 @@
                         <label for="passwordConfirm" class="form-label">Confirm Password</label>
                         <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm">
                     </div>
-                    <button type="submit" class="btn btn-primary">Register User</button>
+                    <!-- Passwords Don't Match Message (Initially hidden) -->
+                    <div id="password-match" class="text-danger" style="display: none;">Passwords don't match.</div>
+                    <button type="submit" class="btn btn-primary" id="registerButton" disabled>Register User</button>
+
+
                 </form>
             </div>
         </div>
     </div>
+    
+
     <script>
+        // Add a click event listener to the "BookNook" link
         document.addEventListener("DOMContentLoaded", function () {
-            var homeLink = document.querySelector("a[href='home.html']");
-            homeLink.addEventListener("click", function (event) {
-                event.preventDefault();
-                window.location.href = "home.html";
+            var bookNookLink = document.getElementById("booknook-link");
+            bookNookLink.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent the default behavior of the link
+                // Redirect to main.html
+                window.location.href = "main.html";
             });
         });
+        document.addEventListener("DOMContentLoaded", function () {
+    var passwordField = document.getElementById("password");
+    var confirmPasswordField = document.getElementById("passwordConfirm");
+    var passwordMatchMessage = document.getElementById("password-match");
+
+    confirmPasswordField.addEventListener("input", function () {
+        // Check if the passwords match
+        if (passwordField.value !== confirmPasswordField.value) {
+            // Passwords don't match, display the message
+            passwordMatchMessage.style.display = "block";
+        } else {
+            // Passwords match, hide the message
+            passwordMatchMessage.style.display = "none";
+        }
+    });
+});
+document.addEventListener("DOMContentLoaded", function () {
+    var passwordField = document.getElementById("password");
+    var confirmPasswordField = document.getElementById("passwordConfirm");
+    var passwordMatchMessage = document.getElementById("password-match");
+    var registerButton = document.getElementById("registerButton");
+
+    // Function to check if all form fields are filled
+    function isFormValid() {
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var password = passwordField.value;
+        var confirmPassword = confirmPasswordField.value;
+
+        return (
+            name.trim() !== "" &&
+            email.trim() !== "" &&
+            password.trim() !== "" &&
+            confirmPassword.trim() !== "" &&
+            password === confirmPassword // Check if passwords match
+        );
+    }
+
+    confirmPasswordField.addEventListener("input", function () {
+        // Check if the passwords match
+        if (passwordField.value !== confirmPasswordField.value) {
+            // Passwords don't match, display the message
+            passwordMatchMessage.style.display = "block";
+            registerButton.disabled = true; // Disable the button
+        } else {
+            // Passwords match, hide the message
+            passwordMatchMessage.style.display = "none";
+            // Enable the button if all form fields are filled
+            registerButton.disabled = !isFormValid();
+        }
+    });
+
+    // Listen for input events on all form fields to enable/disable the button
+    var formFields = document.querySelectorAll(".form-control");
+    formFields.forEach(function (field) {
+        field.addEventListener("input", function () {
+            registerButton.disabled = !isFormValid();
+        });
+    });
+});
+
+
+
+
+
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+       
 </body>
 
 </html>

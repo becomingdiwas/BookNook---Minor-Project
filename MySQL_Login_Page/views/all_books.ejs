@@ -10,14 +10,142 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <style>
     /* Add custom CSS here */
-    #priceFromInput,
-    #priceToInput {
-      max-width: 120px;
+
+    /* Set background image */
+    body {
+      background-image: url('https://images2.alphacoders.com/261/26102.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      
+    }
+
+    /* Navbar styles */
+    .navbar {
+            background-color: #343a40; /* Navbar background color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Navbar box shadow */
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff; /* Navbar brand text color */
+        }
+
+        .navbar-toggler-icon {
+            background-color: #fff; /* Navbar toggler color */
+        }
+
+        .navbar-nav .nav-item {
+            margin-right: 15px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffc107 !important; /* Navbar link color on hover */
+        }
+
+        .navbar {
+            background-color: whitesmoke; /* White navbar background color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Navbar box shadow */
+        }
+
+        .navbar-brand, .nav-link {
+            color: wheat !important; /* Navbar text color */
+        }
+
+        .navbar-toggler-icon {
+            background-color: wheat; /* Navbar toggler color */
+        }
+        .card-img-enlarge {
+    transition: transform 0.3s; /* Add a transition for smooth scaling */
+  }
+  .card-img-enlarge:hover {
+    transform: scale(1.2); /* Scale up the image to 120% of its original size on hover */
+    cursor: pointer; /* Change cursor to a pointer on hover (optional) */
+  }
+  
+
+    .form-control {
+      background-color: rgba(255, 255, 255, 0.8); /* Transparent white form input background */
+      color: #333;
+      border: none;
     }
 
     .form-control::placeholder {
       font-size: 0.9rem;
     }
+
+    .input-group-append button {
+      background-color: #007bff; /* Blue search button */
+      border: none;
+      color: #fff;
+    }
+
+    .input-group-append button:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    /* Book card styles */
+    .card {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s; /* Add transitions for background color and box-shadow */
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-img-top {
+  max-height: 200px;
+  object-fit: cover;
+}
+
+/* Hover animation */
+.card:hover {
+  background-color:rgb(201, 130, 38); /* Change background color on hover */
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Add a larger box shadow on hover */
+}
+.card {
+  /* ... (existing card styles) */
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* Add transition for transform */
+}
+.card:hover {
+      transform: translateY(-5px); /* Card lift on hover */
+    }
+    /* Search result styles */
+   
+
+    h1 {
+      
+      color: whitesmoke;
+      font-weight: bold;
+      
+    }
+
+    /* Button styles */
+    .btn-primary {
+      background-color: #007bff; /* Blue button */
+      border: none;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+    
   </style>
 
   <!-- Add the following lines to include the Bootstrap JavaScript and jQuery -->
@@ -31,7 +159,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <!-- Navbar brand (logo) -->
-      <a class="navbar-brand" href="#">Book Nook</a>
+      <a class="navbar-brand" href="/home.html">BookNook</a>
 
       <!-- Navbar Search Form -->
       <form class="d-flex mx-auto">
@@ -64,7 +192,7 @@
         <div class="col-md-4">
           <div class="card mb-4">
             <% if (book.image) { %>
-              <img src="/uploads/<%= book.image %>" class="card-img-top" alt="Book Image">
+              <img src="/uploads/<%= book.image %>" class="card-img-top card-img-enlarge" alt="Book Image">
             <% } else { %>
               <img src="/uploads/placeholder.png" class="card-img-top" alt="Placeholder Image">
             <% } %>
@@ -74,8 +202,17 @@
               <p class="card-text">Condition: <%= book.book_condition %></p>
               <p class="card-text card-trade-condition">Trade Condition: <%= book.trade_condition %></p>
               <p class="card-text card-price">Price: <%= book.price %></p>
-              <p class="card-text card-price">Exchange With : <%= book.exchangewith %></p>
-              <a href="/books/<%= book.id %>" class="btn btn-primary">View Details</a>
+              <p class="card-text card-price">Exchange With: <%= book.exchangewith %></p>
+              
+              <!-- Add a "View Details" link with a custom data attribute for book ID -->
+              <a href="#" class="btn btn-primary view-details-link" data-book-id="<%= book.id %>">View Details</a>
+              
+              <!-- Provider details initially hidden within a div with a unique ID -->
+              <div id="providerDetails<%= book.id %>" class="provider-details" style="display: none;">
+                <p class="card-text card-provider-name">Provider Name: <%= book.provider_name %></p>
+                <p class="card-text card-provider-number">Provider Number: <%= book.provider_number %></p>
+                <p class="card-text card-provider-location">Provider Location: <%= book.provider_location %></p>
+              </div>
             </div>
           </div>
         </div>
@@ -123,6 +260,24 @@
 
     // Call the filter function on page load to show all books
     filterBooks();
+
+    const viewDetailsLinks = document.querySelectorAll('.view-details-link');
+
+  viewDetailsLinks.forEach(link => {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+
+      const bookId = this.getAttribute('data-book-id');
+      const providerDetails = document.getElementById(`providerDetails${bookId}`);
+
+      if (providerDetails.style.display === 'none' || providerDetails.style.display === '') {
+        providerDetails.style.display = 'block';
+      } else {
+        providerDetails.style.display = 'none';
+      }
+    });
+  });
+  
   </script>
 </body>
 

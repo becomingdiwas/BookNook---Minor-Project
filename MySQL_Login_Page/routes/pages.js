@@ -27,4 +27,5 @@ router.get('/profile', authController.isLoggedIn, (req, res) => {
   }
 });
 
+
 module.exports = router;

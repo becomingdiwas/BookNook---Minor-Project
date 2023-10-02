@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include any additional CSS or custom stylesheets here -->
+    <style>
+        /* Sidebar styles */
+        #sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            padding: 20px;
+            color: white;
+        }
+
+        /* Page content styles */
+        #content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        /* Improved list styles */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        /* User and book data styles */
+        .user-data, .book-data {
+            border: 1px solid #ccc;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <h2>Admin Dashboard</h2>
+        <ul class="list-unstyled components">
+            <li>
+                <a href="#">Dashboard</a>
+            </li>
+            <li>
+                <!-- Add a button for "Users" with an ID -->
+                <a href="#" id="user-button">Users</a>
+            </li>
+            <li>
+                <!-- Add a button for "Books" with an ID -->
+                <a href="#" id="book-button">Books</a>
+            </li>
+            <li>
+                <a href="#">Settings</a>
+            </li>
+        </ul>
+        <!-- Logout button -->
+        <a href="main.html" class="btn btn-danger mt-3">Logout</a>
+    </nav>
+
+    <!-- Page content -->
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <!-- Add a navigation bar here if needed -->
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span>Toggle Sidebar</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Page content goes here -->
+        <div class="container">
+            <h1>Welcome, <%= admin.name %></h1>
+            <p>Email: <%= admin.email %></p>
+            <!-- Add more admin details as needed -->
+        </div>
+        
+        <!-- User data section -->
+        <div id="user-section" style="display: none;">
+            <h2>Users Available</h2>
+            <ul>
+                <% users.forEach(user => { %>
+                <li class="user-data">
+                    <strong>Username:</strong> <%= user.name %><br>
+                    <strong>Email:</strong> <%= user.email %><br>
+                    <strong>Password:</strong> <%= user.password %><br>
+                </li>
+                <% }); %>
+            </ul>
+        </div>
+        
+        <!-- Book data section -->
+        <div id="book-section" style="display: none;">
+            <h2>Books Uploaded</h2>
+            <ul>
+                <% books.forEach(book => { %>
+                <li class="book-data">
+                    <strong>Title:</strong> <%= book.title %><br>
+                    <strong>Author:</strong> <%= book.author %><br>
+                    <strong>Book Condition:</strong> <%= book.book_condition %><br>
+                    <strong>Trade Condition:</strong> <%= book.trade_condition %><br>
+                    <strong>Price:</strong> <%= book.price %><br>
+                    <strong>Image:</strong> <%= book.image %><br>
+                    <strong>Exchange With:</strong> <%= book.exchangewith %><br>
+                    <strong>Provider Name:</strong> <%= book.provider_name %><br>
+                    <strong>Provider Number:</strong> <%= book.provider_number %><br>
+                    <strong>Provider Location:</strong> <%= book.provider_location %><br>
+                </li>
+                <% }); %>
+            </ul>
+        </div>
+
+    <!-- Include Bootstrap and jQuery scripts at the end of the body for better performance -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include any additional JavaScript files or scripts here -->
+    <script>
+        // Sidebar toggle functionality
+        $("#sidebarCollapse").on("click", function() {
+            $("#sidebar").toggleClass("active");
+        });
+
+    // Handle "Users" button click
+    $("#user-button").on("click", function () {
+        $("#user-section").show();
+        $("#book-section").hide();
+    });
+
+    // Handle "Books" button click
+    $("#book-button").on("click", function () {
+        $("#user-section").hide();
+        $("#book-section").show();
+    });
+    </script>
+</body>
+</html>
